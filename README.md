@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Muhamad Fajar Faturohman
+# Anime Recommendation System
 
 ## Proyek Overview
 
@@ -77,22 +77,22 @@ Data yang digunakan dalam proyek ini adalah [Anime Recommendation Database 2020]
 
 #### Top 10 Anime Terpopuler
 
-![Top 10 Anime Terpopuler]()
+![Top 10 Anime Terpopuler](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20Popularity.png?raw=true)
 Dari hasil di atas, anime Death Note menempati posisi pertama sebagai anime terpopuler, diikitu Shingeki no Kyojin di posisi kedua, dan Fullmetal Alchemist: Brotherhood di posisi ketiga.
 
 #### Top 10 Anime Terfavorit
 
-![Top 10 Anime Terfavorit]()
+![Top 10 Anime Terfavorit](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20Anime%20Terfavorit.png?raw=true)
 Sedangkan, untuk anime terfavorit di posisi pertama adalah Fullmetal Alchemist: Brotherhood, diikuti Steins;Gate, lalu Hunter x Hunter (2020).
 
 #### Distribusi Genre
 
-![Distribusi Genre]()
+![Distribusi Genre](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Distribusi%20Genre.png?raw=true)
 Genre paling banyak pada data ini adalah Comedy yang mencapai 6000 anime, diikuti genre Action sebanyak sekitar 3900, dan Fantasy sebanyak sekitar 3500
 
 #### Distribusi Rating Pengguna
 
-![Distribusi Rating Pengguna]()
+![Distribusi Rating Pengguna](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Distribusi%20Rating%20Pengguna.png?raw=true)
 Distribusi rating yang diberikan berada pada rantang 5 hingga 10. Hanya sedikit pengguna yang memberikan rating dibawah 5.
 
 ## Data Preparation
