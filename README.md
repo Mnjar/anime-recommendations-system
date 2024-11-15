@@ -309,7 +309,7 @@ $$\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^n(y_i-\^{y_i})^2}$$
 Dimana:
 
 $$y_i \text{: adalah nilai aktual (rating yang diberikan user untuk item)}$$
-$$\^{y_i} \text{: adalah nilai prediksi (rating yang diprediksi model)}$$
+$$\^y_i \text{: adalah nilai prediksi (rating yang diprediksi model)}$$
 $$n \text{: adalah jumlah observasi.}$$
 
 RMSE mengukur perbedaan rata-rata antara prediksi dan observasi aktual. Semakin kecil nilai RMSE, semakin baik model dalam memprediksi nilai rating. Tetapi, RMSE sensitif terhadap outlier, karena kesalahan besar dihitung secara kuadrat, yang artinya error besar memiliki pengaruh yang lebih signifikan dibandingkan error kecil.
