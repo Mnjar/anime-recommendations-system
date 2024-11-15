@@ -250,7 +250,7 @@ Untuk menyelesaikan permasalahan, model yang digunakan pada kasus ini adalah Con
 
 Content-Based Filtering dengan Cosine Similarity bekerja dengan merekomendasikan item berdasarkan fitur-fitur yang dimiliki item itu sendiri. Dalam konteks ini, model melihat kesamaan antara anime berdasarkan genre mereka. Algoritma ini menggunakan **TF-IDF Vectorization** untuk mengubah teks genre pada setiap anime menjadi vektor numerik yang mewakili bobot setiap genre dalam konteks anime tersebut. Setelah vektor TF-IDF dihasilkan, selanjutnya adalah menghitung kemiripan antar anime berdasarkan genre menggunakan cosine similarity. Ini mengukur sudut antara dua vektor genre, dengan hasil kemiripan antara 0 (tidak mirip) dan 1 (sangat mirip).
 
-Berikut **Top-N recommendations** yang dihasilkan Content-Based Filtering dengan Cosine Similarity:
+Berikut **Top-N recommendations** berdasarkan anime_id=20 (naruto) yang dihasilkan Content-Based Filtering dengan Cosine Similarity:
 
 ![Top-N recommendations]()
 
@@ -304,12 +304,6 @@ Model Collaborative Filtering Dengan Neural Network dievaluasi menggunakan RMSE 
 
 **Formula**:
 
-$$\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^n(y_i-\^{y_i})^2}$$
-
-Dimana:
-
-$$y_i \text{: adalah nilai aktual (rating yang diberikan user untuk item)}$$
-$$\^y_i \text{: adalah nilai prediksi (rating yang diprediksi model)}$$
-$$n \text{: adalah jumlah observasi.}$$
+![RMSE]()
 
 RMSE mengukur perbedaan rata-rata antara prediksi dan observasi aktual. Semakin kecil nilai RMSE, semakin baik model dalam memprediksi nilai rating. Tetapi, RMSE sensitif terhadap outlier, karena kesalahan besar dihitung secara kuadrat, yang artinya error besar memiliki pengaruh yang lebih signifikan dibandingkan error kecil.
