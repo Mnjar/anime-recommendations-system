@@ -2,6 +2,8 @@
 
 ## Proyek Overview
 
+Banyaknya konten dan pilihan yang tersedia bagi pengguna, seperti pada platform e-commerce, streaming, atau platform berbasis konten lainnya, menimbulkan masalah bagi pengguna, mereka sering kali merasa kewalahan dengan banyaknya pilihan yang membuat mereka sulit menemukan konten yang relevan, dan sesuai dengan preferensi pribadi. Sebagai contoh, tanpa bantuan sistem rekomendasi, pengguna dapat menghabiskan lebih banyak waktu mencari produk atau konten yang mereka sukai, yang dapat menyebabkan frustrasi dan menurunkan tingkat kepuasan pengguna. Oleh karena itu, tantangan dalam pengembangan sistem rekomendasi adalah bagaimana menyediakan rekomendasi yang relevan, akurat, dan personal dalam waktu yang singkat serta meminimalisir rasa kewalahan pengguna.
+
 Sistem rekomendasi memainkan peran kunci dalam meningkatkan kepuasan pengguna. Sistem rekomendasi tidak hanya meningkatkan kepuasan pengguna melalui keakuratan dan keragaman rekomendasi, tetapi juga dipengaruhi oleh mekanisme psikologis yang melibatkan perasaan pengguna, dan tujuan mereka. Ketika tujuan pengguna dalam menggunakan suatu platform seperti e-commerce atau aplikasis streaming sejalan dengan hasil rekomendasi, terutama dalam hal keakuratan dan keragaman, kepuasan pengguna meningkat. Sebaliknya, pengguna yang eksploratif dapat merasa berkurangnya kepuasan saat menghadapi rekomendasi yang terlalu akurat karena aktivasi resistansi psikologis.
 
 Selain itu sistem rekomendasi membantu pengambilan keputusan berbasis pengalaman di e-commerce, terutama melalui penerapan collaborative filtering menggunakan neural network. Studi ini menunjukkan bahwa sistem rekomendasi yang baik tidak hanya meningkatkan akurasi prediksi, tetapi juga memperkaya pengalaman pengguna dalam membuat keputusan online, seperti dalam memilih film.
@@ -10,6 +12,7 @@ Maka, proyek ini penting untuk diselesaikan karena dengan mengembangkan sistem r
 
 Referensi:
 
+- D. Roy, and M. Dutta, "A systematic review and research perspective on recommender systems," J. Big Data, vol. 9, no. 1, pp. 1-36, Jan. 2022. <https://doi.org/10.1186/s40537-022-00592-5>
 - X. He, Q. Liu, and S. Jung, "The Impact of Recommendation System on User Satisfaction: A Moderated Mediation Approach," J. Theor. Appl. Electron. Commer. Res., vol. 19, no. 1, pp. 448-466, Feb. 2024. <https://doi.org/10.3390/jtaer19010024>
 - A. J. Lin, C. L. Hsu, and E. Y. Li, "Improving the effectiveness of experiential decisions by recommendation systems," Expert Syst. Appl., vol. 41, no. 10, pp. 4904-4914, Aug. 2014. <https://doi.org/10.1016/j.eswa.2014.01.035>
 
@@ -34,11 +37,13 @@ Proyek ini bertujuan untuk membangun model Recommender System yang dapat untuk p
 
 ## Data Understanding
 
-Data yang digunakan dalam proyek ini adalah [Anime Recommendation Database 2020](https://www.kaggle.com/datasets/hernan4444/anime-recommendation-database-2020) yang berisi informasi 17.563 daftar anime, dan preferensi dari 325.772 user yang berbeda. Dataset yang digunakan pada proyek ini adalah anime.csv yang akan disebut sebagai data **anime**, dan rating_complete.csv yang berisi data pengguna akan disebut sebagai data **user**.
+Data yang digunakan dalam proyek ini adalah [Anime Recommendation Database 2020](https://www.kaggle.com/datasets/hernan4444/anime-recommendation-database-2020) yang berisi informasi 17.563 daftar anime, dan preferensi dari 325.772 user yang berbeda. Dataset yang digunakan pada proyek ini adalah anime.csv yang akan disebut sebagai data **Anime**, dan rating_complete.csv yang berisi data pengguna akan disebut sebagai data **Users**.
+
+Data **Anime** memiliki **17.562** baris dengan **35** kolom, dan data **Users** memiliki **57.633.278** baris dengan **3** kolom. Fitur dari kedua data tersebut dapat dilihat pada uraian di bawah ini.
 
 ### Variabel-variabel pada data Anime Recommendation Database 2020
 
-**anime.csv**:
+**Anime**:
 
 - MAL_ID: ID anime dari MyAnimeList
 - Name: Nama lengkap anime
@@ -67,7 +72,7 @@ Data yang digunakan dalam proyek ini adalah [Anime Recommendation Database 2020]
 - Plan to Watch: Jumlah pengguna yang berencana menonton anime.
 - Score-1 - Score-10: Jumlah pengguna yang memberikan skor 1 sampai 10.
 
-**rating_complete.csv**:
+**Users**:
 
 - user_id: ID pengguna.
 - anime_id: ID anime dari dataset anime.csv yang telah dinilai oleh pengguna.
@@ -75,51 +80,9 @@ Data yang digunakan dalam proyek ini adalah [Anime Recommendation Database 2020]
 
 ### Explanatory Data Analaysis
 
-#### Top 10 Anime Terpopuler
+#### Cek Missing Values
 
-![Top 10 Anime Terpopuler](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20Popularity.png?raw=true)
-
-Dari hasil di atas, anime Death Note menempati posisi pertama sebagai anime terpopuler, diikitu Shingeki no Kyojin di posisi kedua, dan Fullmetal Alchemist: Brotherhood di posisi ketiga.
-
-#### Top 10 Anime Terfavorit
-
-![Top 10 Anime Terfavorit](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20Anime%20Terfavorit.png?raw=true)
-
-Sedangkan, untuk anime terfavorit di posisi pertama adalah Fullmetal Alchemist: Brotherhood, diikuti Steins;Gate, lalu Hunter x Hunter (2020).
-
-#### Distribusi Genre
-
-![Distribusi Genre](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Distribusi%20Genre.png?raw=true)
-
-Genre paling banyak pada data ini adalah Comedy yang mencapai 6000 anime, diikuti genre Action sebanyak sekitar 3900, dan Fantasy sebanyak sekitar 3500
-
-#### Distribusi Rating Pengguna
-
-![Distribusi Rating Pengguna](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Distribusi%20Rating%20Pengguna.png?raw=true)
-
-Distribusi rating yang diberikan berada pada rantang 5 hingga 10. Hanya sedikit pengguna yang memberikan rating dibawah 5.
-
-## Data Preparation
-
-Pada bagian ini, tahapan data preparation dibagi menjadi 2 bagian, yang pertama adalah Data Cleaning sebelum masuk ke pemodelan Content-Based Filtering, kedua adalah data preparation untuk pemodelan Neural Collaborative Filtering.
-
-### 1. Data Cleaning
-
-#### 1.1 Mengubah Tipe Data Yang Tidak Sesuai
-
-Kolom Ranked, Episodes, dan kolom Score-1 sampai Score-10 saat ini bertipe data object. Kita akan mengubah tipe datanya menjadi integer. Selama proses ini, nilai yang tidak valid, seperti Unknown, akan diganti dengan 0.
-
-Untuk kolom Score, kita akan menghitung rata-rata dari nilai di kolom Score-1 sampai Score-10. Nilai Unknown di kolom-kolom tersebut akan diubah menjadi 0, dan kolom Score akan diubah menjadi float karena ini merupakan kolom yang berisi rata-rata. Rata-rata skor untuk kolom Score akan dihitung dengan menggunakan rumus berikut:
-
-$$\text{Score} = \frac{1 \cdot \text{Score-1} + 2 \cdot \text{Score-2} + \ldots + 10 \cdot \text{Score-10}}{\text{Score-1} + \text{Score-2} + \ldots + \text{Score-10}}$$
-
-Ini dilakukan agar data siap digunakan pada tahap pemodelan nanti.
-
-#### 1.2 Cek Missing Values
-
-Melakukan pengecekan missing value. Agar pada tahap pemodelan tidak terjadi error, dan model dapat belajar dengan baik. Karena jika terdapat nilai NaN, ini berarti model kehilangan informasi dan dapat mempengaruhi kinerja model.
-
-Pengecekan dilakukan menggunakan fungsi `isnull()` dan `sum()` dari libary pandas seperti berikut
+Pengecekan dilakukan menggunakan fungsi `isnull()` dan `sum()` dari libary pandas seperti berikut.
 
 ```bash
 print("Missing pada data anime:")
@@ -181,11 +144,9 @@ dtype: int64
 
 Setelah dilakukan pengecekan, tidak terdapat missing value pada data anime dan user.
 
-#### 1.3 Cek Duplicate Values
+#### Cek Duplicate Values
 
-Pengecekan duplicate values dilakukan untuk memastikan tidak ada terdapat nilai duplikat pada data. Karena hal tersebut hanya memperbesar dimensi data tanpa memberikan informasi yang berarti.
-
-Pengecekan dilakukan menggunakan fungsi `duplicated()` dan `sum()` dari library pandas seperti berikut:
+Pengecekan dilakukan menggunakan fungsi `duplicated()` dan `sum()` dari library pandas seperti berikut.
 
 ```bash
 print("Duplicate values pada data anime:")
@@ -207,7 +168,56 @@ Duplicate values pada data user:
 0
 ```
 
-Dari kedua output di atas, tidak terdapat data duplikat pada data **anime** dan **user**.
+Dari kedua output di atas, tidak terdapat data duplikat pada data **Anime** dan **Users**.
+
+#### Top 10 Anime Terpopuler
+
+![Top 10 Anime Terpopuler](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20Popularity.png?raw=true)
+
+Dari hasil di atas, anime Death Note menempati posisi pertama sebagai anime terpopuler, diikitu Shingeki no Kyojin di posisi kedua, dan Fullmetal Alchemist: Brotherhood di posisi ketiga.
+
+#### Top 10 Anime Terfavorit
+
+![Top 10 Anime Terfavorit](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20Anime%20Terfavorit.png?raw=true)
+
+Sedangkan, untuk anime terfavorit di posisi pertama adalah Fullmetal Alchemist: Brotherhood, diikuti Steins;Gate, lalu Hunter x Hunter (2020).
+
+#### Distribusi Genre
+
+![Distribusi Genre](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Distribusi%20Genre.png?raw=true)
+
+Genre paling banyak pada data ini adalah Comedy yang mencapai 6000 anime, diikuti genre Action sebanyak sekitar 3900, dan Fantasy sebanyak sekitar 3500
+
+#### Distribusi Rating Pengguna
+
+![Distribusi Rating Pengguna](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Distribusi%20Rating%20Pengguna.png?raw=true)
+
+Distribusi rating yang diberikan berada pada rantang 5 hingga 10. Hanya sedikit pengguna yang memberikan rating dibawah 5.
+
+## Data Preparation
+
+Pada bagian ini, tahapan data preparation dibagi menjadi 2 bagian, yaitu data preparation sebelum masuk ke pemodelan Content-Based Filtering, dan kedua adalah data preparation untuk pemodelan Neural Collaborative Filtering.
+
+### 1. Data Preparation Untuk Content-Based Filtering
+
+#### 1.1 Mengubah Tipe Data Yang Tidak Sesuai
+
+Kolom Ranked, Episodes, dan kolom Score-1 sampai Score-10 saat ini bertipe data object. Kita akan mengubah tipe datanya menjadi integer. Selama proses ini, nilai yang tidak valid, seperti Unknown, akan diganti dengan 0.
+
+Untuk kolom Score, kita akan menghitung rata-rata dari nilai di kolom Score-1 sampai Score-10. Nilai Unknown di kolom-kolom tersebut akan diubah menjadi 0, dan kolom Score akan diubah menjadi float karena ini merupakan kolom yang berisi rata-rata. Rata-rata skor untuk kolom Score akan dihitung dengan menggunakan rumus berikut:
+
+$$\text{Score} = \frac{1 \cdot \text{Score-1} + 2 \cdot \text{Score-2} + \ldots + 10 \cdot \text{Score-10}}{\text{Score-1} + \text{Score-2} + \ldots + \text{Score-10}}$$
+
+Ini dilakukan karena pada tahap mendapatkan Top-N recommendations, kolom 'Score' akan digunakan sebagai threshold relevansi item yang direkomendasikan.
+
+#### 1.2 TF-IDF Vectorizer
+
+TF-IDF (Term Frequency-Inverse Document Frequency) digunakan untuk mengubah data teks, dalam kasus ini genre anime, menjadi representasi numerik yang bisa diproses oleh algoritma. TF-IDF memberikan bobot lebih tinggi pada genre yang jarang muncul dan bobot lebih rendah pada genre yang umum, sehingga membantu dalam menonjolkan fitur-fitur yang unik dan penting dari setiap anime. Secara garis besar, prosesnya dapat dilihat sebagai berikut:
+
+- TF-IDF digunakan untuk memberikan bobot pada setiap genre berdasarkan seberapa sering genre tersebut muncul dalam seluruh dataset (term frequency) dan seberapa jarang genre tersebut muncul di dataset secara keseluruhan (inverse document frequency).
+- Vectorization (Transformasi ke Matrik TF-IDF), yaiut setiap anime diubah menjadi vektor yang berisi bobot TF-IDF dari genre-nya. Setiap genre diwakili oleh kolom, dan nilai dalam kolom tersebut adalah bobot TF-IDF.
+
+Setelah anime diubah menjadi vektor berbasis genre, selanjutnya cosine similarity bisa digunakan untuk mengukur kesamaan antar anime.
 
 ### 2. Data Preparation Untuk Pemodelan Neural Collaborative Filtering
 
@@ -254,17 +264,23 @@ Untuk menyelesaikan permasalahan, model yang digunakan pada kasus ini adalah Con
 
 Content-Based Filtering dengan Cosine Similarity bekerja dengan merekomendasikan item berdasarkan fitur-fitur yang dimiliki item itu sendiri. Dalam konteks ini, model melihat kesamaan antara anime berdasarkan genre mereka. Algoritma ini menggunakan **TF-IDF Vectorization** untuk mengubah teks genre pada setiap anime menjadi vektor numerik yang mewakili bobot setiap genre dalam konteks anime tersebut. Setelah vektor TF-IDF dihasilkan, selanjutnya adalah menghitung kemiripan antar anime berdasarkan genre menggunakan cosine similarity. Ini mengukur sudut antara dua vektor genre, dengan hasil kemiripan antara 0 (tidak mirip) dan 1 (sangat mirip).
 
-Berikut **Top-N recommendations** berdasarkan anime_id=20 (naruto) yang dihasilkan Content-Based Filtering dengan Cosine Similarity:
+#### 1.1 Parameter
+
+- X = vektor TF-IDF -> matriks yang berisi vektor-vektor yang mewakili data input.
+- Y = default -> matriks kedua untuk perhitungan kesamaan, yang default-nya diatur ke None.
+- dense_output = default -> Parameter ini menentukan apakah hasil yang dikembalikan berbentuk dense atau sparse matrix.
+
+Berikut **Top-N recommendations** berdasarkan anime_id=20 (Naruto) yang dihasilkan Content-Based Filtering dengan Cosine Similarity:
 
 ![Top-N recommendations](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20CBF.png?raw=true)
 
-#### 1.2 Kelebihan
+#### 1.3 Kelebihan
 
 - Mudah dipahami karena model mendasarkan rekomendasinya pada fitur-fitur yang eksplisit (seperti genre).
 - Mampu memberikan rekomendasi berdasarkan preferensi unik pengguna.
 - Cold-Start Problem: Content-based filtering mengatasi masalah "cold start" pada item baru karena rekomendasi didasarkan pada fitur item, bukan perilaku pengguna.
 
-#### 1.3 Kekurangan
+#### 1.4 Kekurangan
 
 - Model hanya merekomendasikan anime yang sangat mirip dengan anime yang sudah diketahui, sehingga dapat kehilangan keragaman rekomendasi.
 - Fitur yang terbatas. Artinya, kualitas rekomendasi sangat tergantung pada seberapa baik fitur (genre) mewakili keseluruhan kualitas anime. Jika hanya menggunakan genre, aspek lain seperti gaya visual atau kualitas produksi tidak diperhitungkan.
@@ -274,17 +290,28 @@ Berikut **Top-N recommendations** berdasarkan anime_id=20 (naruto) yang dihasilk
 
 Pada proyek ini, Collaborative Filtering dengan Neural Network menggunakan embedding untuk merepresentasikan pengguna dan item (anime) dalam vektor berdimensi rendah. Setiap user dan item (anime) direpresentasikan sebagai vektor embedding. Embedding ini adalah representasi berdimensi rendah yang dihasilkan oleh lapisan embedding. Setelah mendapatkan embedding user dan item, keduanya digabungkan menjadi satu vektor. Vektor gabungan ini kemudian dilewatkan melalui beberapa lapisan fully connected (MLP) untuk memodelkan interaksi kompleks antara user dan item. Model juga menghitung dot product antara vektor embedding user dan item sebagai representasi interaksi linier antara mereka.
 
+#### 2.1 Parameter
+
+- num_users = 71518 -> Jumlah total pengguna.
+- num_items = 7862 -> Jumlah total item.
+- embedding_size = 50 -> Ukuran dimensi vektor embedding untuk pengguna dan item.
+- dropout_rate = default -> Tingkat dropout yang digunakan untuk regularisasi selama pelatihan. Nilai Default-nya 0.3
+- mlp_hidden_layers = default -> List jumlah unit di setiap layer MLP. Nilai default-nya adalah [64, 32, 16].
+- loss = BinaryCrossentropy -> Fungsi kerugian yang digunakan untuk optimasi.
+- optimizers = Adam dengan learning rate 0.0001 -> Untuk menyesuaikan bobot dan bias model untuk meminimalkan fungsi loss dan meningkatkan akurasi.
+- metrics = RootMeanSquaredError -> Digunakan untuk menilai kinerja model.
+
 Berikut contoh **Top-N recommendations** yang dihasilkan Collaborative Filtering dengan Neural Network:
 
 ![Top-N recommendations](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20CF.png?raw=true)
 
-#### 2.1 Kelebihan
+#### 2.2 Kelebihan
 
 - Neural Collaborative Filtering (NCF) lebih fleksibel dibandingkan pendekatan berbasis matriks faktorisasi standar karena mampu memodelkan interaksi non-linier antar user dan item melalui MLP.
 - Kemampuan Generalisasi yang baik. Dengan menggunakan embedding dan jaringan saraf, model ini lebih mampu menangkap pola tersembunyi yang kompleks, yang mungkin terlewatkan oleh metode faktorisasi matriks tradisional.
 - Model ini dapat menangani masalah sparsity pada data rating yang sering terjadi pada Collaborative Filtering, karena tidak sepenuhnya bergantung pada hubungan langsung antar item.
 
-#### 2.2 Kekurangan
+#### 2.3 Kekurangan
 
 - Neural network memerlukan tuning hyperparameter yang lebih rumit dan sumber daya komputasi yang lebih besar dibandingkan metode tradisional.
 - Jika tidak dilengkapi dengan metode regularisasi yang tepat seperti dropout, model ini rentan terhadap overfitting terutama jika jumlah data training terbatas.
