@@ -252,7 +252,7 @@ Content-Based Filtering dengan Cosine Similarity bekerja dengan merekomendasikan
 
 Berikut **Top-N recommendations** berdasarkan anime_id=20 (naruto) yang dihasilkan Content-Based Filtering dengan Cosine Similarity:
 
-![Top-N recommendations]()
+![Top-N recommendations](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20CBF.png?raw=true)
 
 #### 1.2 Kelebihan
 
@@ -272,7 +272,7 @@ Pada proyek ini, Collaborative Filtering dengan Neural Network menggunakan embed
 
 Berikut contoh **Top-N recommendations** yang dihasilkan Collaborative Filtering dengan Neural Network:
 
-![Top-N recommendations]()
+![Top-N recommendations](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/Top-10%20CF.png?raw=true)
 
 #### 2.1 Kelebihan
 
@@ -304,6 +304,6 @@ Model Collaborative Filtering Dengan Neural Network dievaluasi menggunakan RMSE 
 
 **Formula**:
 
-![RMSE]()
+![RMSE](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/RMSE.png?raw=true)
 
 RMSE mengukur perbedaan rata-rata antara prediksi dan observasi aktual. Semakin kecil nilai RMSE, semakin baik model dalam memprediksi nilai rating. Tetapi, RMSE sensitif terhadap outlier, karena kesalahan besar dihitung secara kuadrat, yang artinya error besar memiliki pengaruh yang lebih signifikan dibandingkan error kecil.
