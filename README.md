@@ -302,6 +302,19 @@ $$\text{Precission} = \frac{\text{Jumlah rekomendasi yang relevan}}{\text{Jumlah
 
 Precision mengukur berapa banyak rekomendasi yang diberikan oleh model yang relevan (misalnya, anime dengan skor di atas 6.0 dianggap relevan). Formula precision menghitung persentase dari rekomendasi yang memang relevan dengan preferensi pengguna, atau dalam konteks ini, rekomendasi yang memiliki skor rating di atas ambang batas.
 
+Berdasarkan evaluasi yang bisa dilihat di bawah ini, model CBF menghasilkan akurasi rekomendasi yang baik. Dari 10 anime yang direkomendasikan, 80% di antaranya memiliki skor di atas 6, yang berarti 8 dari 10 rekomendasi dianggap relevan.
+
+```bash
+# Menghitung Precision
+relevant_recommendations = recommended_anime[recommended_anime['Relevance'] == True]
+precision = len(relevant_recommendations) / len(recommended_anime)
+print(f"\nPrecision: {precision:.2f}")
+```
+
+```bash
+Precision: 0.80
+```
+
 ### 2. Metrik evaluasi Collaborative Filtering Dengan Neural Network
 
 Model Collaborative Filtering Dengan Neural Network dievaluasi menggunakan RMSE (Root Mean Squared Error). RMSE mengukur seberapa jauh prediksi model dari nilai aktualnya.
@@ -311,3 +324,19 @@ Model Collaborative Filtering Dengan Neural Network dievaluasi menggunakan RMSE 
 ![RMSE](https://github.com/Mnjar/anime-recommendations-system/blob/main/images/RMSE.png?raw=true)
 
 RMSE mengukur perbedaan rata-rata antara prediksi dan observasi aktual. Semakin kecil nilai RMSE, semakin baik model dalam memprediksi nilai rating. Tetapi, RMSE sensitif terhadap outlier, karena kesalahan besar dihitung secara kuadrat, yang artinya error besar memiliki pengaruh yang lebih signifikan dibandingkan error kecil.
+
+Berdasarkan hasil evaluasi yang dapat dilihat di bawah ini, dengan RMSE sebesar 0.1728, model NCF dapat dikatakan cukup baik dalam memprediksi rating anime, dan ini menunjukkan kinerja model yang kuat dalam tugas rekomendasi berdasarkan pola interaksi pengguna. Nilai RMSE yang rendah menunjukkan bahwa rata-rata perbedaan antara rating yang diprediksi model dan rating sebenarnya sangat kecil.
+
+```bash
+# Evaluasi pada data test dengan RMSE
+_, rmse_test = model.evaluate(X_test, y_test, batch_size=64)
+
+print(f"Test RMSE: {rmse_test:.4f}")
+```
+
+```bash
+157/157 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - loss: 0.5772 - root_mean_squared_error: 0.1727
+Test RMSE: 0.1728
+```
+
+Secara keseluruhan kedua model Content-Based Filtering (CBF) dan Collaborative Filtering (CF), memiliki hasil yang cukup baik dalam memberikan rekomendasi anime kepada pengguna. Dilihat dari hasil CBF yang memiliki Precission yang baik (80% relevan dari 10 rekomendasi), dan nilai RMSE dari model CF yang cukup rendah (0.1728), menandakan bahwa model NCF memiliki akurasi yang tinggi dalam merepresentasikan preferensi pengguna berdasarkan pola interaksi antara pengguna dan anime.
